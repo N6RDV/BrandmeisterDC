@@ -29,3 +29,7 @@ BranmeisterDC opens current MMDVM Host log file and waits for a line indicating 
 
 If the call is directed to TG 4000, BranmeisterDC drops all dynamic groups and interrupts QSO on a time slot on which call has been made by alling Branmeister API via HTTPS.
 See the article [Using the BrandMeister API by Vladimir, AC2F](https://coloradodigital.net/2019/12/01/using-the-brandmeister-api/) for more details.
+
+## Instructions
+* [Setup](SETUP.md)
+* [Usage](SETUP.md)
