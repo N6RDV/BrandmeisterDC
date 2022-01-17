@@ -73,7 +73,7 @@ fi
 
 printf "\n4. MAKING AND COPYING EXECUTABLE FILE\n\n"
 make
-cp -f BrandmeisterDC /opt/
+sudo cp -f BrandmeisterDC /usr/local/bin/
 
 printf "Success!\n\n"
 printf "BrandmeisterDC can be started:\n"
