@@ -32,4 +32,4 @@ See the article [Using the BrandMeister API by Vladimir, AC2F](https://coloradod
 
 ## Instructions
 * [Setup](SETUP.md)
-* [Usage](SETUP.md)
+* [Usage](USAGE.md)
