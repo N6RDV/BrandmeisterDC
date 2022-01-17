@@ -1,3 +1,5 @@
+[Back to Readme](README.md "Back to Readme")
+
 # Setup
 
 ## Installation script
