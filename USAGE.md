@@ -54,7 +54,7 @@ sudo reboot
 
 Daemon service can be stoppeb/started by running commands
 ```
-service nextiondriver stop
-service nextiondriver start
+service brandmeisterdc stop
+service brandmeisterdc start
 ```
 Output should be seen in `/var/log/syslog`
