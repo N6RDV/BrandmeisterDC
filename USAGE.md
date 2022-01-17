@@ -57,3 +57,4 @@ Daemon service can be stoppeb/started by running commands
 service nextiondriver stop
 service nextiondriver start
 ```
+Output should be seen in `/var/log/syslog`
