@@ -31,7 +31,7 @@ BranmeisterDC uses pahs to MMDVM Host configuration and BM API key files relevan
 
 MMDVM Host configuration is expected to be found in `/etc/mmdvmhost`
 
-MMDVM Host logs are expected to be found in `/var/log/pi-star/MMDVM-%F.log` where %F is replaced with current UTC date in `Y-m-d` format.
+MMDVM Host logs are expected to be found in `/var/log/pi-star/MMDVM-%F.log` where `%F` is replaced with current UTC date in `Y-m-d` format.
 
 BM API key is execpted to be found in `/etc/bmapi.key`
 
