@@ -37,7 +37,7 @@ BM API key is execpted to be found in `/etc/bmapi.key`
 
 **Important!** 
 
-Make sure DM API key is set by running commad `cat /etc/bmapi.key`. If it's notset - wollow [these instructions](http://wiki.pistar.uk/PI-Star_integration_with_BrandMeister_API).
+Make sure DM API key is set by running commad `cat /etc/bmapi.key`. If it's not set - wollow [these instructions](http://wiki.pistar.uk/PI-Star_integration_with_BrandMeister_API).
 
 Additional parameters are initialized with default values too, but can be added to the MMDVM Host configuration file and conveniently edited on the Pi-Star `Configruation > Expert > MMDVMHost` page.
 BrandmeisterDC settings are added to MMDVM Host configuration file automaticaly by the installation script or can be added manually.
