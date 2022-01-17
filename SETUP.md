@@ -6,7 +6,7 @@
 Simplest way is to use the installation script.
 ```
 rpi-rw
-curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/N6RDV/BrandmeisterDC/main/install.sh | bash
+curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/N6RDV/BrandmeisterDC/master/install.sh | bash
 ```
 
 ## Manual setup
