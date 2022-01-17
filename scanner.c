@@ -45,11 +45,10 @@ FILE *open_log(struct tm* utc) {
 	char path[PATH_LEN];
 	strftime(path, PATH_LEN, settings.mmdvm_log, utc);
 	writelog(LOG_INFO, "Opening MMDVM log file \"%s\".", path);
-	FILE *fp = fopen(path, "r");
-	if (fp == NULL) {
-		writelog(LOG_ERR, "Couldn't open MMDVM log file \"%s\".", path);
-		perror(path);
-		exit(EXIT_FAILURE);
+	FILE *fp;
+	while ((fp = fopen(path, "r")) == NULL) {
+		writelog(LOG_DEBUG, "Couldn't open MMDVM log file \"%s\".", path);
+		sleep(settings.scan_interval / 1000);
 	}
 	fseek(fp, 0, SEEK_END);
 	return fp;
@@ -60,6 +59,7 @@ char *process_group(char *line, regmatch_t *group) {
 	char *value = malloc(len + 1);
 	strncpy(value, line + group->rm_so, len);
 	value[len] = '\0';
+
 	return value;
 }
 
@@ -70,6 +70,7 @@ void process_match(char *line, struct Listener *listener) {
 	}
 	(*listener->listener)(values, listener->ngroups);
 	for (size_t j = 0; j < listener->ngroups; j++) {
+
 		free(values[j]);
 	}
 }
@@ -78,6 +79,7 @@ void process_line(char *line, struct Listener *listeners, int size) {
 	for (int i = 0; i < size; i++) {
 		struct Listener *listener = &listeners[i];
 		if (regexec(&listener->regex, line, listener->ngroups, listener->groups, 0) == 0) {
+
 			process_match(line, listener);
 		}
 	}
@@ -100,6 +102,7 @@ void build_listeners(listener_t *callbacks, char **filters, struct Listener *lis
 
 void free_listeners(struct Listener *listeners, size_t size) {
 	for (int i = 0; i < size; i++) {
+
 		regfree(&listeners[i].regex);
 		free(listeners[i].groups);
 	}

@@ -134,9 +134,9 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	writelog(LOG_DEBUG, "config_path=%s\r\nsettings.bm_dc_id=%d\r\nsettings.scan_interval=%d\r\n"
-					"settings.verbosity=%d\r\nsettings.repeater_id=%u\r\nsettings.bm_api_key=%s\r\n"
-					"settings.bm_hs_security=%s\r\nsettings.mmdvm_log=%s\r\n",
+	writelog(LOG_DEBUG, "config_path=%s\nsettings.bm_dc_id=%d\nsettings.scan_interval=%d\n"
+					"settings.verbosity=%d\nsettings.repeater_id=%u\nsettings.bm_api_key=%s\n"
+					"settings.bm_hs_security=%s\nsettings.mmdvm_log=%s\n",
 					config_path, settings.bm_dc_id, settings.scan_interval, settings.verbosity,
 					settings.repeater_id, settings.bm_api_key, settings.bm_hs_security, settings.mmdvm_log);
 
