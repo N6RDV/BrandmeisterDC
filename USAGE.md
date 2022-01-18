@@ -46,10 +46,17 @@ Ctrl-O
 Enter
 Ctrl-X
 ```
-
-4. Reboot
+4. Enable autostart
+```
+sudo systemctl enable brandmeisterdc.service
+```
+6. Reboot
 ```
 sudo reboot
+```
+7. Check status after reboot
+```
+sudo systemctl status brandmeisterdc.service
 ```
 
 Daemon service can be stoppeb/started by running commands
