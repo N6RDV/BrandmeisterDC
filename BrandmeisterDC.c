@@ -149,7 +149,6 @@ int main(int argc, char *argv[]) {
 	writelog(LOG_NOTICE, "BrandmeisterDC v%s", BrandmeisterDC_VERSION);
 	writelog(LOG_NOTICE, "Copyright (c) 2022 Dennis Riabchenko N6RDV.");
 
-
 	read_settings(config_path);
 	read_settings(bmapikey_path);
 
