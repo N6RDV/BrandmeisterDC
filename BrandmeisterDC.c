@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <syslog.h>
+#include <sys/stat.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -103,23 +104,51 @@ pid_t proc_find(const char* name) {
 	return -1;
 }
 
-int main(int argc, char *argv[]) {
-	writelog(LOG_NOTICE, "BrandmeisterDC v%s", BrandmeisterDC_VERSION);
-	writelog(LOG_NOTICE, "Copyright (c) 2022 Dennis Riabchenko N6RDV.");
+void detach() {
+	pid_t pid = 0;
+	pid_t sid = 0;
 
+	pid = fork();
+	if (pid < 0) {
+		writelog(LOG_ERR, "Fork failed");
+		exit(EXIT_FAILURE);
+	}
+	if (pid > 0)
+		exit(EXIT_SUCCESS);
+	umask(0);
+	sid = setsid();
+	if (sid < 0)
+		exit(EXIT_FAILURE);
+	chdir("/tmp");
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
+}
+
+int main(int argc, char *argv[]) {
 	signal(SIGPIPE, SIG_IGN);
 	signal(SIGINT, terminate);
 	signal(SIGQUIT, terminate);
 	signal(SIGHUP, terminate);
 	signal(SIGTERM, terminate);
 
-	parse_args(argc, argv);
-
 	// Default settings
 	settings.bm_dc_id = 4000;
 	settings.scan_interval = 1000;
 	settings.verbosity = LOG_NOTICE;
 	strcpy(settings.mmdvm_log, "/var/log/pi-star/MMDVM-%F.log");
+
+	parse_args(argc, argv);
+
+	if (settings.debug_mode)
+		writelog(LOG_NOTICE, "Starting in console mode.");
+	else {
+		writelog(LOG_NOTICE, "Starting in daemon mode.");
+		detach();
+	}
+	writelog(LOG_NOTICE, "BrandmeisterDC v%s", BrandmeisterDC_VERSION);
+	writelog(LOG_NOTICE, "Copyright (c) 2022 Dennis Riabchenko N6RDV.");
+
 
 	read_settings(config_path);
 	read_settings(bmapikey_path);
