@@ -132,10 +132,14 @@ void detach() {
 }
 
 int main(int argc, char *argv[]) {
+	settings.verbosity = LOG_NOTICE;
+
 	parse_args(argc, argv);
 
-	if (trace_memory)
+	if (trace_memory) {
+		writelog(LOG_NOTICE, "Starting with memory allocation  tracing.");
 		mtrace();
+	}
 
 	signal(SIGPIPE, SIG_IGN);
 	signal(SIGINT, terminate);
@@ -146,7 +150,6 @@ int main(int argc, char *argv[]) {
 	// Default settings
 	settings.bm_dc_id = 4000;
 	settings.scan_interval = 1000;
-	settings.verbosity = LOG_NOTICE;
 	strcpy(settings.mmdvm_log, "/var/log/pi-star/MMDVM-%F.log");
 
 	if (settings.debug_mode)
