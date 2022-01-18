@@ -62,7 +62,7 @@ void disconnect(char **values, size_t size) {
 
 void parse_args(int argc, char *argv[]) {
 	int opt;
-	while ((opt = getopt(argc, argv, "dvc:k:hi")) != -1) {
+	while ((opt = getopt(argc, argv, "dvhimc:k:")) != -1) {
 		switch (opt) {
 			case 'v':
 				printf("\nBrandmeisterDC v%s\n", BrandmeisterDC_VERSION);
