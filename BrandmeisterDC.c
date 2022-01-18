@@ -90,7 +90,7 @@ void parse_args(int argc, char *argv[]) {
 			case ':':
 				printf("\nBrandmeisterDC v%s\n", BrandmeisterDC_VERSION);
 				printf("Copyright (c) 2022 Dennis Riabchenko N6RDV.\n\n");
-				printf("Usage: %s -c <configuration file> [-f] [-d] [-h]\n\n", argv[0]);
+				printf("Usage: %s -c <configuration file> [-k <bmapikey fiel>] [-i] [-d] [-m] [-h]\n\n", argv[0]);
 				printf("  -c\tspecify the path to MMDVM configuration file\n");
 				printf("  -k\tspecify the path to BM API key file\n");
 				printf("  -i\tignore other instances and run anyway\n");
