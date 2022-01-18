@@ -14,6 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+#include <mcheck.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,6 +39,7 @@ const char *signame[] = {"INVALID", "SIGHUP", "SIGINT", "SIGQUIT", "SIGILL", "SI
 char config_path[MAX_SETTING_LEN] = "/etc/mmdvmhost";
 char bmapikey_path[MAX_SETTING_LEN] = "/etc/bmapi.key";
 unsigned int ignore_process = 0;
+unsigned int trace_memory = 0;
 
 void terminate(int sig) {
 	writelog(LOG_ERR, "BrandmeisterDC v%s terminated on signal %s (%s)", BrandmeisterDC_VERSION,
@@ -78,6 +80,9 @@ void parse_args(int argc, char *argv[]) {
 			case 'd':
 				settings.debug_mode = 1;
 				break;
+			case 'm':
+				trace_memory = 1;
+				break;
 			case 'i':
 				ignore_process = 1;
 				break;
@@ -90,6 +95,7 @@ void parse_args(int argc, char *argv[]) {
 				printf("  -k\tspecify the path to BM API key file\n");
 				printf("  -i\tignore other instances and run anyway\n");
 				printf("  -d\tstart in debug mode\n");
+				printf("  -m\ttrace memory allocation (MALLOC_TRACE environment variable should be set; see mtrace manpage)\n");
 				printf("  -h\tthis help.\n\n");
 				exit(EXIT_SUCCESS);
 
@@ -126,6 +132,11 @@ void detach() {
 }
 
 int main(int argc, char *argv[]) {
+	parse_args(argc, argv);
+
+	if (trace_memory)
+		mtrace();
+
 	signal(SIGPIPE, SIG_IGN);
 	signal(SIGINT, terminate);
 	signal(SIGQUIT, terminate);
@@ -137,8 +148,6 @@ int main(int argc, char *argv[]) {
 	settings.scan_interval = 1000;
 	settings.verbosity = LOG_NOTICE;
 	strcpy(settings.mmdvm_log, "/var/log/pi-star/MMDVM-%F.log");
-
-	parse_args(argc, argv);
 
 	if (settings.debug_mode)
 		writelog(LOG_NOTICE, "Starting in console mode.");
