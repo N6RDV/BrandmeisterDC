@@ -3,7 +3,7 @@
 # Usage
 
 ## Flags
-Run `/opt/BrandmeisterDC -h` for details
+Run `/usr/local/bin/BrandmeisterDC -h` for details
 
 ## Startup
 
