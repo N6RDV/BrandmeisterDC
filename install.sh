@@ -4,6 +4,8 @@ CONF_SECTION="Brandmeister DC"
 DEFAULT_CONF="[$CONF_SECTION]\nVerbosityLevel=5\nDisconnectGroup=4000\nScanInterval=1000\nMMDVMLog=/var/log/pi-star/MMDVM-%%F.log"
 SERVICE_DEF="/lib/systemd/system/brandmeisterdc.service"
 
+sudo mount -o remount,rw / ; sudo mount -o remount,rw /boot
+
 printf "\n1. CLONING GITHUB REPOSITORY\n\n"
 if [ -d "$WORKING_DIR" ];
 then
