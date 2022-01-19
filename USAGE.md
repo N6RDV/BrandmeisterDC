@@ -55,7 +55,7 @@ sudo systemctl enable brandmeisterdc.service
 ```
 sudo reboot
 ```
-7. Check status after reboot
+6. Check status after reboot
 ```
 sudo systemctl status brandmeisterdc.service
 ```
