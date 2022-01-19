@@ -6,7 +6,7 @@ MMDVMHOST=/etc/mmdvmhost
 BMAPI=/etc/bmapi.key
 GIT_REPO=https://github.com/N6RDV/BrandmeisterDC.git
 WORKING_DIR=/tmp/BrandmeisterDC/
-SERVICE_DEF="/lib/systemd/system/brandmeisterdc.service"
+SERVICE_DEF=/lib/systemd/system/brandmeisterdc.service
 
 sudo mount -o remount,rw / ; sudo mount -o remount,rw /boot
 
