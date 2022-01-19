@@ -2,6 +2,10 @@
 
 CONF_SECTION="Brandmeister DC"
 DEFAULT_CONF="[$CONF_SECTION]\nVerbosityLevel=5\nDisconnectGroup=4000\nScanInterval=1000\nMMDVMLog=/var/log/pi-star/MMDVM-%%F.log"
+MMDVMHOST=/etc/mmdvmhost
+BMAPI=/etc/bmapi.key
+GIT_REPO=https://github.com/N6RDV/BrandmeisterDC.git
+WORKING_DIR=/tmp/BrandmeisterDC/
 SERVICE_DEF="/lib/systemd/system/brandmeisterdc.service"
 
 sudo mount -o remount,rw / ; sudo mount -o remount,rw /boot
