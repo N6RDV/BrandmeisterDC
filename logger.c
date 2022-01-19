@@ -28,10 +28,10 @@ void writelog(unsigned int level, char *format, ...) {
 	va_list args;
 	char str[1024];
 
-	if (settings.debug_mode || level <= settings.verbosity) {
+	if (level <= settings.verbosity) {
 		va_start(args, format);
 
-		if (settings.debug_mode) {
+		if (settings.daemon_mode) {
 			vsnprintf(str, 1024, format, args);
 			printf("%s: %s\n", level_name[level], str);
 		} else {

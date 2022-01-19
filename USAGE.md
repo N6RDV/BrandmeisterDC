@@ -7,11 +7,11 @@ Run `/usr/local/bin/BrandmeisterDC -h` for details
 
 ## Startup
 
-### Debug mode
+### Console mode
 ```
-sudo /usr/local/bin/BrandmeisterDC -d
+sudo /usr/local/bin/BrandmeisterDC
 ```
-In debug mode BrandmeisterDC verbose output is directed to terminal
+In console mode BrandmeisterDC verbose output is directed to terminal
 
 ## Daemon mode
 1. Create service file
@@ -34,7 +34,7 @@ Requires=mmdvmhost.service
 User=root
 Type=forking
 WorkingDirectory=/usr/local/etc/
-ExecStart=/usr/local/bin/BrandmeisterDC
+ExecStart=/usr/local/bin/BrandmeisterDC -d
 ExecStop=/usr/bin/killall BrandmeisterDC
 
 [Install]

@@ -77,5 +77,5 @@ sudo cp -f BrandmeisterDC /usr/local/bin/
 
 printf "Success!\n\n"
 printf "BrandmeisterDC can be started:\n"
-printf " - in debug mode 'sudo /usr/local/bin/BrandmeisterDC -d' (verbose output to terminal);\n"
+printf " - in console mode 'sudo /usr/local/bin/BrandmeisterDC';\n"
 printf " - as a service with autostart (see https://github.com/N6RDV/BrandmeisterDC/blob/main/README.md).\n"

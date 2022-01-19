@@ -78,7 +78,7 @@ void parse_args(int argc, char *argv[]) {
 				strncpy(bmapikey_path, optarg, sizeof (bmapikey_path) - 2);
 				break;
 			case 'd':
-				settings.debug_mode = 1;
+				settings.daemon_mode = 1;
 				break;
 			case 'm':
 				trace_memory = 1;
@@ -94,8 +94,8 @@ void parse_args(int argc, char *argv[]) {
 				printf("  -c\tspecify the path to MMDVM configuration file\n");
 				printf("  -k\tspecify the path to BM API key file\n");
 				printf("  -i\tignore other instances and run anyway\n");
-				printf("  -d\tstart in debug mode\n");
-				printf("  -m\ttrace memory allocation (MALLOC_TRACE environment variable should be set; see mtrace manpage)\n");
+				printf("  -d\tstart in daemon mode\n");
+				printf("  -m\ttrace memory allocation (MALLOC_TRACE environment variable should be set; see mtrace man page)\n");
 				printf("  -h\tthis help.\n\n");
 				exit(EXIT_SUCCESS);
 
@@ -152,12 +152,12 @@ int main(int argc, char *argv[]) {
 	settings.scan_interval = 1000;
 	strcpy(settings.mmdvm_log, "/var/log/pi-star/MMDVM-%F.log");
 
-	if (settings.debug_mode)
-		writelog(LOG_NOTICE, "Starting in console mode.");
-	else {
+	if (settings.daemon_mode) {
 		writelog(LOG_NOTICE, "Starting in daemon mode.");
 		detach();
-	}
+	} else
+		writelog(LOG_NOTICE, "Starting in console mode.");
+
 	writelog(LOG_NOTICE, "BrandmeisterDC v%s", BrandmeisterDC_VERSION);
 	writelog(LOG_NOTICE, "Copyright (c) 2022 Dennis Riabchenko N6RDV.");
 

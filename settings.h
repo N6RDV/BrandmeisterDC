@@ -27,7 +27,7 @@ struct Settings {
 	unsigned int bm_dc_id;
 	unsigned int scan_interval;
 	unsigned int verbosity;
-	unsigned int debug_mode;
+	unsigned int daemon_mode;
 };
 
 extern struct Settings settings;
