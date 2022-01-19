@@ -59,7 +59,6 @@ then
   exit 1
 fi
 
-sudo mount -o remount,rw / ; sudo mount -o remount,rw /boot
 printf "\n3. ADDING SECTION TO $MMDVMHOST CONFIGURATION FILE\n\n"
 
 if grep -q "\[$CONF_SECTION\]" $MMDVMHOST;
