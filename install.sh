@@ -2,10 +2,7 @@
 
 CONF_SECTION="Brandmeister DC"
 DEFAULT_CONF="[$CONF_SECTION]\nVerbosityLevel=5\nDisconnectGroup=4000\nScanInterval=1000\nMMDVMLog=/var/log/pi-star/MMDVM-%%F.log"
-MMDVMHOST=/etc/mmdvmhost
-BMAPI=/etc/bmapi.key
-GIT_REPO=https://github.com/N6RDV/BrandmeisterDC.git
-WORKING_DIR=/tmp/BrandmeisterDC/
+SERVICE_DEF="/lib/systemd/system/brandmeisterdc.service"
 
 printf "\n1. CLONING GITHUB REPOSITORY\n\n"
 if [ -d "$WORKING_DIR" ];
@@ -75,7 +72,19 @@ printf "\n4. MAKING AND COPYING EXECUTABLE FILE\n\n"
 make
 sudo cp -f BrandmeisterDC /usr/local/bin/
 
+printf "\n5. CREATING SERVICE DEFINITION\n\n"
+if [ -f "$SERVICE_DEF" ];
+then
+  read -p "Service definition already exists. Overwrite (yes/no)?" yn
+  case $yn in
+    [Yy]* )
+			sudo cat brandmeisterdc.service > $SERVICE_DEF
+  esac
+else
+  sudo touch > $SERVICE_DEF
+  sudo cat brandmeisterdc.service > $SERVICE_DEF
+fi
+sudo systemctl daemon-reload
+sudo systemctl enable brandmeisterdc.service
+
 printf "Success!\n\n"
-printf "BrandmeisterDC can be started:\n"
-printf " - in console mode 'sudo /usr/local/bin/BrandmeisterDC';\n"
-printf " - as a service with autostart (see https://github.com/N6RDV/BrandmeisterDC/blob/main/README.md).\n"

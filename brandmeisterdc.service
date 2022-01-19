@@ -1,0 +1,16 @@
+[Unit]
+Description=BrandmeisterDC service
+DefaultDependencies=no
+After=local-fs.target wifi-country.service network-online.target
+Before=timers.target
+Requires=mmdvmhost.service
+
+[Service]
+User=root
+Type=forking
+WorkingDirectory=/usr/local/etc/
+ExecStart=/usr/local/bin/BrandmeisterDC -d
+ExecStop=/usr/bin/killall BrandmeisterDC
+
+[Install]
+WantedBy=multi-user.target
