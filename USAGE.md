@@ -48,9 +48,10 @@ Ctrl-X
 ```
 4. Enable autostart
 ```
+sudo systemctl daemon-reload
 sudo systemctl enable brandmeisterdc.service
 ```
-6. Reboot
+5. Reboot
 ```
 sudo reboot
 ```
@@ -61,7 +62,7 @@ sudo systemctl status brandmeisterdc.service
 
 Daemon service can be stoppeb/started by running commands
 ```
-service brandmeisterdc stop
-service brandmeisterdc start
+sudo service brandmeisterdc stop
+sudo service brandmeisterdc start
 ```
 Output should be seen in `/var/log/syslog`
