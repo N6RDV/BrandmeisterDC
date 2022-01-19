@@ -82,7 +82,7 @@ then
   case $yn in
     [Yy]* )
       printf "\nReplacing existing service definition..."
-      service brandmeisterdc stop
+      sudo service brandmeisterdc stop
       sudo cat brandmeisterdc.service > $SERVICE_DEF
       printf "done\n";;
     * )
@@ -98,7 +98,7 @@ fi
 printf "\nReloading systemctl daemon and starting service..."
 sudo systemctl daemon-reload
 sudo systemctl enable brandmeisterdc.service
-service brandmeisterdc start
+sudo service brandmeisterdc start
 printf "done\n\n"
 
 printf "Success!\n\n"
