@@ -28,7 +28,7 @@ Description=BrandmeisterDC service
 DefaultDependencies=no
 After=local-fs.target wifi-country.service network-online.target
 Before=timers.target
-Requires=mmdvmhost.service
+Wants=mmdvmhost.service
 
 [Service]
 User=root
