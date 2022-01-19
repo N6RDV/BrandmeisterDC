@@ -20,7 +20,6 @@ cd $WORKING_DIR
 
 printf "\n2. CHECKING $MMDVMHOST CONFIGURATION FILE\n\n"
 error=0
-
 if grep -Pzq "Id=[0-9]{7,9}" <(grep -Pzo "\[DMR\][^\[]+" $MMDVMHOST);
 then
   printf "ESSID: OK\n"
@@ -60,7 +59,6 @@ then
 fi
 
 printf "\n3. ADDING SECTION TO $MMDVMHOST CONFIGURATION FILE\n\n"
-
 if grep -q "\[$CONF_SECTION\]" $MMDVMHOST;
 then
   printf "Aleady contains configuration for Brandmeister DC\n"
@@ -91,5 +89,29 @@ else
 fi
 sudo systemctl daemon-reload
 sudo systemctl enable brandmeisterdc.service
+
+printf "\n5. CREATING SERVICE DEFINITION\n\n"
+if [ -f "$SERVICE_DEF" ];
+then
+  read -p "Service definition already exists. Overwrite (yes/no)? " yn
+  case $yn in
+    [Yy]* )
+      printf "\nReplacing existing service definition..."
+      sudo cat brandmeisterdc.service > $SERVICE_DEF
+      printf "done\n";;
+    * )
+      printf "\nLeaving existing service definition as is.\n";;
+  esac
+else
+  printf "\nCreating new service definition..."
+  sudo touch > $SERVICE_DEF
+  sudo cat brandmeisterdc.service > $SERVICE_DEF
+  printf "done\n"
+fi
+
+printf "\nReloading systemctl daemon and enabling service..."
+sudo systemctl daemon-reload
+sudo systemctl enable brandmeisterdc.service
+printf "done\n\n"
 
 printf "Success!\n\n"
