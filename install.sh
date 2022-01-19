@@ -78,25 +78,11 @@ sudo cp -f BrandmeisterDC /usr/local/bin/
 printf "\n5. CREATING SERVICE DEFINITION\n\n"
 if [ -f "$SERVICE_DEF" ];
 then
-  read -p "Service definition already exists. Overwrite (yes/no)?" yn
-  case $yn in
-    [Yy]* )
-			sudo cat brandmeisterdc.service > $SERVICE_DEF
-  esac
-else
-  sudo touch > $SERVICE_DEF
-  sudo cat brandmeisterdc.service > $SERVICE_DEF
-fi
-sudo systemctl daemon-reload
-sudo systemctl enable brandmeisterdc.service
-
-printf "\n5. CREATING SERVICE DEFINITION\n\n"
-if [ -f "$SERVICE_DEF" ];
-then
   read -p "Service definition already exists. Overwrite (yes/no)? " yn
   case $yn in
     [Yy]* )
       printf "\nReplacing existing service definition..."
+      service brandmeisterdc stop
       sudo cat brandmeisterdc.service > $SERVICE_DEF
       printf "done\n";;
     * )
@@ -109,9 +95,10 @@ else
   printf "done\n"
 fi
 
-printf "\nReloading systemctl daemon and enabling service..."
+printf "\nReloading systemctl daemon and starting service..."
 sudo systemctl daemon-reload
 sudo systemctl enable brandmeisterdc.service
+service brandmeisterdc start
 printf "done\n\n"
 
 printf "Success!\n\n"
